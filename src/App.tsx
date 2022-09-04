@@ -5,14 +5,17 @@ import { ProductList } from "./pages/ProductList";
 import { Footer } from "./components/Footer";
 import { Newsletter } from "./components/Newsletter";
 import { Products } from "./components/Products";
+import { Product } from "./pages/Product";
 
 function App() {
   return (
     <>
       <Announcement />
       <Navbar />
-      <ProductList />
-      <Products />
+      {/* <Main/> */}
+      {/* <ProductList />
+      <Products /> */}
+      <Product/>
       <Newsletter />
       <Footer />
     </>
