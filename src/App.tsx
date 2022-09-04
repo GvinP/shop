@@ -6,18 +6,22 @@ import { Footer } from "./components/Footer";
 import { Newsletter } from "./components/Newsletter";
 import { Products } from "./components/Products";
 import { Product } from "./pages/Product";
+import { Register } from "./pages/Register";
+import { Login } from "./pages/Login";
 
 function App() {
   return (
     <>
-      <Announcement />
-      <Navbar />
+      {/* <Register /> */}
+      <Login/>
+      {/* <Announcement /> */}
+      {/* <Navbar /> */}
       {/* <Main/> */}
-      {/* <ProductList />
-      <Products /> */}
-      <Product/>
-      <Newsletter />
-      <Footer />
+      {/* <ProductList /> */}
+      {/* <Products /> */}
+      {/* <Product/> */}
+      {/* <Newsletter /> */}
+      {/* <Footer /> */}
     </>
   );
 }
