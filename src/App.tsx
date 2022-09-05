@@ -8,20 +8,22 @@ import { Products } from "./components/Products";
 import { Product } from "./pages/Product";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
+import { Cart } from "./pages/Cart";
 
 function App() {
   return (
     <>
       {/* <Register /> */}
-      <Login/>
-      {/* <Announcement /> */}
-      {/* <Navbar /> */}
+      {/* <Login/> */}
+      <Announcement />
+      <Navbar />
+      <Cart/>
       {/* <Main/> */}
       {/* <ProductList /> */}
       {/* <Products /> */}
       {/* <Product/> */}
       {/* <Newsletter /> */}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
