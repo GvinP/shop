@@ -1,14 +1,21 @@
 import styled from "styled-components";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
+import {mobile} from '../responsive'
 
 const Container = styled.div`
   height: 60px;
+  ${mobile({
+    "height": "50px",
+  })}
 `;
 const Wrapper = styled.div`
   padding: 10px 20px;
   display: flex;
   align-items: center;
   justify-content: space-beetween;
+  ${mobile({
+    "padding": "10px 0px",
+  })}
 `;
 const LeftBlock = styled.div`
   flex: 1;
@@ -18,6 +25,9 @@ const LeftBlock = styled.div`
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
+  ${mobile({
+    "display": "none",
+  })}
 `;
 const SearchContainer = styled.div`
   border: 1px solid lightgray;
@@ -28,6 +38,9 @@ const SearchContainer = styled.div`
 `;
 const Input = styled.input`
   border: none;
+  ${mobile({
+    "width": "50px",
+  })}
 `;
 const CenterBlock = styled.div`
   flex: 1;
@@ -36,12 +49,19 @@ const CenterBlock = styled.div`
 const Logo = styled.h1`
   font-weight: bold;
   margin: 0;
+  ${mobile({
+    "font-size": "24px",
+  })}
 `;
 const RightBlock = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({
+    "justify-content": "center",
+    "flex": "2",
+  })}
 `;
 
 const MenuItem = styled.div`
@@ -49,6 +69,10 @@ const MenuItem = styled.div`
   cursor: pointer;
   position: relative;
   margin-left: 25px;
+  ${mobile({
+    "font-size": "12px",
+    "margin-left": "10px",
+  })}
 `;
 const Badge = styled.div`
   border-radius: 50%;
@@ -70,7 +94,7 @@ export const Navbar = () => {
         <LeftBlock>
           <Language>en</Language>
           <SearchContainer>
-            <Input />
+            <Input placeholder="Search"/>
             <AiOutlineSearch size={16} color={'gray'} />
           </SearchContainer>
         </LeftBlock>

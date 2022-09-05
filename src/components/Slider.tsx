@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useState } from "react";
+import {mobile} from "../responsive"
 
 type ArrowProps = {
   direction: "left" | "right";
@@ -15,6 +16,9 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  ${mobile({
+    "display": "none",
+  })}
 `;
 const Arrow = styled.div`
   width: 50px;
