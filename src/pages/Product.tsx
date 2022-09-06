@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { IoMdRemove, IoMdAdd } from "react-icons/io";
 import { mobile } from "../responsive";
+import {useState, useEffect} from 'react'
+import { useLocation } from "react-router-dom";
+import axios from 'axios'
+import { ProductType } from "../components/Products";
 
 type FilterColorProps = {
   color: string;
@@ -108,35 +112,40 @@ const Button = styled.button`
 `;
 
 export const Product = () => {
+  const location = useLocation()
+  const id = location.pathname.split('/')[2]
+  const [product, setProduct] = useState<ProductType>({} as ProductType)
+
+  useEffect(()=>{
+    const getProduct = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/products/${id}`)
+        setProduct(res.data)
+      } catch (error) {
+        
+      }
+    }
+    getProduct()
+  }, [])
+
   return (
     <Container>
       <ImageContainer>
-        <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+        <Image src={product.image} />
       </ImageContainer>
       <InfoContainer>
-        <Title>Denim jumpsuit</Title>
-        <Description>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni
-          molestias cupiditate eius at eos, placeat qui corporis natus obcaecati
-          possimus, dignissimos porro. Ducimus quo odit expedita ipsa nobis,
-          architecto exercitationem!
-        </Description>
-        <Price>$ 20</Price>
+        <Title>{product.title}</Title>
+        <Description>{product.description}</Description>
+        <Price>$ {product.price}</Price>
         <FilterContainer>
           <Filter>
             <FilterTitle>Color</FilterTitle>
-            <FilterColor color="black" />
-            <FilterColor color="darkblue" />
-            <FilterColor color="gray" />
+            {product?.color?.map(item=><FilterColor color={item} key={item}/>)}
           </Filter>
           <Filter>
             <FilterTitle>Size</FilterTitle>
             <FilterSize>
-              <FilterSizeOption>XS</FilterSizeOption>
-              <FilterSizeOption>S</FilterSizeOption>
-              <FilterSizeOption>M</FilterSizeOption>
-              <FilterSizeOption>L</FilterSizeOption>
-              <FilterSizeOption>XL</FilterSizeOption>
+            {product?.size?.map(item=><FilterSizeOption key={item}>{item}</FilterSizeOption>)}
             </FilterSize>
           </Filter>
         </FilterContainer>

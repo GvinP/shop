@@ -5,6 +5,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineHeart,
 } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const Info = styled.div`
   opacity: 0;
@@ -77,7 +78,9 @@ export const Product = ({ item }: ProductProps) => {
           <AiOutlineShoppingCart />
         </Icon>
         <Icon>
-          <AiOutlineSearch />
+          <Link to={`/product/${item._id}`}>
+            <AiOutlineSearch />
+          </Link>
         </Icon>
         <Icon>
           <AiOutlineHeart />

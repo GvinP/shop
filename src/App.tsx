@@ -22,14 +22,8 @@ function App() {
                                   <Newsletter />
                                   <Footer />
                                 </>}>
-        <Route path="/" element={<>                                
-                                    <Main />
-                                    <Products /> 
-                                  </>} />
-        <Route path="products/:category" element={<>
-                                                    <ProductList />
-                                                    <Products />
-                                                  </>} />
+        <Route path="/" element={<Main />} />
+        <Route path="products/:category" element={<ProductList />} />
         <Route path="product/:id" element={<Product />} />
         <Route path="cart" element={<Cart />} />
         <Route path="*" element={<div>404 Page not found</div>} />
