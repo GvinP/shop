@@ -9,22 +9,34 @@ import { Product } from "./pages/Product";
 import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { Cart } from "./pages/Cart";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 function App() {
+  const user = false;
   return (
-    <>
-      {/* <Register /> */}
-      {/* <Login/> */}
-      <Announcement />
-      <Navbar />
-      <Cart/>
-      {/* <Main/> */}
-      {/* <ProductList /> */}
-      {/* <Products /> */}
-      {/* <Product/> */}
-      {/* <Newsletter /> */}
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<>
+                                  <Announcement />
+                                  <Navbar />
+                                  <Outlet/>
+                                  <Newsletter />
+                                  <Footer />
+                                </>}>
+        <Route path="/" element={<>                                
+                                    <Main />
+                                    <Products /> 
+                                  </>} />
+        <Route path="products/:category" element={<>
+                                                    <ProductList />
+                                                    <Products />
+                                                  </>} />
+        <Route path="product/:id" element={<Product />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="*" element={<div>404 Page not found</div>} />
+      </Route>
+      <Route path="register" element={user ? <Navigate to={"/"} /> : <Register />} />
+      <Route path="login" element={user ? <Navigate to={"/"} /> : <Login />} />
+    </Routes>
   );
 }
 

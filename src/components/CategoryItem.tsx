@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { CategoryItemType } from "./Categories";
+import {Link} from "react-router-dom"
 
 const Container = styled.div`
     flex: 1;
@@ -48,11 +49,13 @@ type CategoryItemProps = {
 export const CategoryItem = ({item}:CategoryItemProps) => {
   return (
     <Container>
+        <Link to={`/products/${item.category}`}>
         <Image src={item.image}/>
         <Info>
             <Title>{item.title}</Title>
             <Button>Shop now</Button>
         </Info>
+        </Link>
     </Container>
   )
 }
