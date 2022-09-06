@@ -1,6 +1,6 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { publicRequest } from "../api/config";
 import { Product } from "./Product";
 
 const Container = styled.div`
@@ -37,11 +37,7 @@ export const Products = ({ category, filters, sort }: ProductsType) => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/products${
-            category ? "?category=" + category : ""
-          }`
-        );
+        const res = await publicRequest.get(`products${category ? "?category=" + category : ""}`);
         setProducts(res.data);
       } catch (error) {
         console.log(error);

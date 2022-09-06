@@ -3,8 +3,8 @@ import { IoMdRemove, IoMdAdd } from "react-icons/io";
 import { mobile } from "../responsive";
 import {useState, useEffect} from 'react'
 import { useLocation } from "react-router-dom";
-import axios from 'axios'
 import { ProductType } from "../components/Products";
+import { publicRequest } from "../api/config";
 
 type FilterColorProps = {
   color: string;
@@ -70,6 +70,7 @@ const FilterColor = styled.div`
   border-radius: 50%;
   background-color: ${(props: FilterColorProps) => props.color};
   margin: 0px 5px;
+  cursor: pointer;
 `;
 const FilterSize = styled.select`
   margin-left: 10px;
@@ -115,18 +116,25 @@ export const Product = () => {
   const location = useLocation()
   const id = location.pathname.split('/')[2]
   const [product, setProduct] = useState<ProductType>({} as ProductType)
+  const [quantity, setQuantity] = useState(1)
+  const [color, setColor] = useState('')
+  const [size, setSize] = useState('')
 
   useEffect(()=>{
     const getProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/products/${id}`)
+        const res = await publicRequest.get(`products/${id}`)
         setProduct(res.data)
       } catch (error) {
         
       }
     }
     getProduct()
-  }, [])
+  }, [id])
+
+  const handleClick = () => {
+    console.log({color, size});
+  }
 
   return (
     <Container>
@@ -140,22 +148,26 @@ export const Product = () => {
         <FilterContainer>
           <Filter>
             <FilterTitle>Color</FilterTitle>
-            {product?.color?.map(item=><FilterColor color={item} key={item}/>)}
+            {product?.color?.map(item=><FilterColor color={item} key={item} onClick={()=>setColor(item)}/>)}
           </Filter>
           <Filter>
             <FilterTitle>Size</FilterTitle>
-            <FilterSize>
+            <FilterSize onChange={(e)=>setSize(e.target.value)}>
             {product?.size?.map(item=><FilterSizeOption key={item}>{item}</FilterSizeOption>)}
             </FilterSize>
           </Filter>
         </FilterContainer>
         <AddContainer>
           <AmountContainer>
-            <IoMdRemove />
-            <Amount>1</Amount>
-            <IoMdAdd />
+            <IoMdRemove onClick={()=>{
+              if(quantity>1) {
+                setQuantity(prev=>prev-1)
+              }
+              }} />
+            <Amount>{quantity}</Amount>
+            <IoMdAdd onClick={()=>setQuantity(prev=>prev+1)} />
           </AmountContainer>
-          <Button>Add to cart</Button>
+          <Button onClick={handleClick}>Add to cart</Button>
         </AddContainer>
       </InfoContainer>
     </Container>
