@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import {mobile} from '../responsive'
+import { useAppSelector } from "../app/hooks";
+import {Link} from "react-router-dom"
 
 const Container = styled.div`
   height: 60px;
@@ -88,6 +90,7 @@ const Badge = styled.div`
   left: 10px;
 `;
 export const Navbar = () => {
+  const quantity = useAppSelector(state=>state.cart.quantity)
   return (
     <Container>
       <Wrapper>
@@ -104,10 +107,12 @@ export const Navbar = () => {
         <RightBlock>
           <MenuItem>Sign In</MenuItem>
           <MenuItem>Registration</MenuItem>
+          <Link to={'/cart'}>
           <MenuItem>
             <AiOutlineShoppingCart />
-            <Badge>0</Badge>
+            {!!quantity&&<Badge>{quantity}</Badge>}
           </MenuItem>
+          </Link>
         </RightBlock>
       </Wrapper>
     </Container>

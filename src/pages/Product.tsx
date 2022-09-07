@@ -5,6 +5,8 @@ import {useState, useEffect} from 'react'
 import { useLocation } from "react-router-dom";
 import { ProductType } from "../components/Products";
 import { publicRequest } from "../api/config";
+import { useAppDispatch } from "../app/hooks";
+import { addProduct } from "../reducers/cartReducer";
 
 type FilterColorProps = {
   color: string;
@@ -119,6 +121,7 @@ export const Product = () => {
   const [quantity, setQuantity] = useState(1)
   const [color, setColor] = useState('')
   const [size, setSize] = useState('')
+  const dispatch = useAppDispatch()
 
   useEffect(()=>{
     const getProduct = async () => {
@@ -133,7 +136,7 @@ export const Product = () => {
   }, [id])
 
   const handleClick = () => {
-    console.log({color, size});
+    dispatch(addProduct({...product, quantity, color, size}))
   }
 
   return (

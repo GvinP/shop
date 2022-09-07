@@ -10,7 +10,7 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-export type ProductsType = {
+export type ProductsPropsType = {
   category?: string;
   filters?: {
     color?: string;
@@ -30,7 +30,7 @@ export type ProductType = {
   createdAt: string;
 };
 
-export const Products = ({ category, filters, sort }: ProductsType) => {
+export const Products = ({ category, filters, sort }: ProductsPropsType) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([]);
 
