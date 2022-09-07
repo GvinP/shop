@@ -1,13 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ProductType } from '../components/Products';
 
-export interface CounterState {
-  products: ProductType[];
+type CartProductType = ProductType&{
+    quantity: number;
+    price: number;
+    color: string;
+    size: string
+}
+
+export interface CartState {
+  products: CartProductType[];
   quantity: number;
   total: number;
 }
 
-const initialState: CounterState = {
+const initialState: CartState = {
   products: [],
   quantity: 0,
   total: 0,

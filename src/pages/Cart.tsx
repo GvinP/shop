@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IoMdRemove, IoMdAdd } from "react-icons/io";
 import { mobile } from "../responsive";
+import { useAppSelector } from "../app/hooks";
 
 type TopButtonProps = {
   variant?: "filled";
@@ -151,76 +152,56 @@ const Button = styled.button`
 `;
 
 export const Cart = () => {
+  const products = useAppSelector(state=>state.cart.products)
+  const quantity = useAppSelector(state=>state.cart.quantity)
+  const total = useAppSelector(state=>state.cart.total)
   return (
     <Container>
       <Title>Your bag</Title>
       <TopBlock>
         <TopButton>Continue shopping</TopButton>
         <TopTexts>
-          <TopText>Shopping bag(2)</TopText>
+          <TopText>Shopping bag({quantity})</TopText>
           <TopText>Your wishlist(0)</TopText>
         </TopTexts>
         <TopButton variant={"filled"}>Checkout now</TopButton>
       </TopBlock>
       <BottomBlock>
         <Info>
+            {products.map(product=>(
           <Product>
-            <ProductDetail>
-              <Image src="https://lp2.hm.com/hmgoepprod?set=source[/30/8c/308c1b77bfe7c7b4f5631361de4f8e06694e52ac.jpg],origin[dam],category[ladies_shirtsblouses_shirts],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" />
+              <ProductDetail>
+              <Image src={product.image} />
               <Details>
                 <ProductName>
-                  <b>Product: </b>Oversized Corduroy Shirt
+                  <b>Product: </b>{product.title}
                 </ProductName>
                 <ProductId>
-                  <b>ID: </b>312324
+                  <b>ID: </b>{product._id}
                 </ProductId>
-                <ProductColor color="brown" />
+                <ProductColor color={product.color} />
                 <ProductSize>
-                  <b>Size: </b>XS
+                  <b>Size: </b>{product.size}
                 </ProductSize>
               </Details>
             </ProductDetail>
             <PriceDetail>
               <ProductAmountContainer>
                 <IoMdRemove />
-                <ProductAmount>2</ProductAmount>
+                <ProductAmount>{product.quantity}</ProductAmount>
                 <IoMdAdd />
               </ProductAmountContainer>
-              <ProductPrice>$ 20</ProductPrice>
+              <ProductPrice>$ {product.price*product.quantity}</ProductPrice>
             </PriceDetail>
           </Product>
-          <Hr />
-          <Product>
-            <ProductDetail>
-              <Image src="https://lp2.hm.com/hmgoepprod?set=source[/86/ad/86add6324bd249d58526b2c69add27b7e0103389.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[y],hmver[2]&call=url[file:/product/main]" />
-              <Details>
-                <ProductName>
-                  <b>Product: </b>Hooded Sweatshirt Dress
-                </ProductName>
-                <ProductId>
-                  <b>ID: </b>543234
-                </ProductId>
-                <ProductColor color="black" />
-                <ProductSize>
-                  <b>Size: </b>XS
-                </ProductSize>
-              </Details>
-            </ProductDetail>
-            <PriceDetail>
-              <ProductAmountContainer>
-                <IoMdRemove />
-                <ProductAmount>1</ProductAmount>
-                <IoMdAdd />
-              </ProductAmountContainer>
-              <ProductPrice>$ 30</ProductPrice>
-            </PriceDetail>
-          </Product>
+            ))}
+            <Hr />
         </Info>
         <Summary>
           <SummaryTitle>Order Summary</SummaryTitle>
           <SummaryItem>
             <SummaryItemText>Subtotal</SummaryItemText>
-            <SummaryItemPrice>$ 70</SummaryItemPrice>
+            <SummaryItemPrice>$ {total}</SummaryItemPrice>
           </SummaryItem>
           <SummaryItem>
             <SummaryItemText>Estimated shipping</SummaryItemText>
@@ -232,7 +213,7 @@ export const Cart = () => {
           </SummaryItem>
           <SummaryItem variant={"total"}>
             <SummaryItemText>Total</SummaryItemText>
-            <SummaryItemPrice>$ 70</SummaryItemPrice>
+            <SummaryItemPrice>$ {total}</SummaryItemPrice>
           </SummaryItem>
           <Button>Checkout now</Button>
         </Summary>
