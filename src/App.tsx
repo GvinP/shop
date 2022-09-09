@@ -9,9 +9,10 @@ import { Register } from "./pages/Register";
 import { Login } from "./pages/Login";
 import { Cart } from "./pages/Cart";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { useAppSelector } from "./app/hooks";
 
 function App() {
-  const user = false;
+  const user = useAppSelector(state=>state.auth.currentUser?.username);
   return (
     <Routes>
       <Route path="/" element={<>

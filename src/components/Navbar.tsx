@@ -105,8 +105,12 @@ export const Navbar = () => {
           <Logo>Shop</Logo>
         </CenterBlock>
         <RightBlock>
+        <Link to={'/login'}>
           <MenuItem>Sign In</MenuItem>
+        </Link>
+        <Link to={'/register'}>
           <MenuItem>Registration</MenuItem>
+        </Link>
           <Link to={'/cart'}>
           <MenuItem>
             <AiOutlineShoppingCart />
