@@ -24,7 +24,6 @@ export const login = createAsyncThunk<AuthResponse | undefined, AuthData>(
     thunkAPI.dispatch(loginStart())
     try {
       const response = await authAPI.login(email, password);
-      localStorage.setItem("token", response.data.accessToken);
       thunkAPI.dispatch(loginSuccess())
       return response.data;
     } catch (error) {
