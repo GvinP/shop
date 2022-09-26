@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
-import {mobile} from '../responsive'
+import { mobile } from "../responsive";
 import { useAppSelector } from "../app/hooks";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 60px;
   ${mobile({
-    "height": "50px",
+    height: "50px",
   })}
 `;
 const Wrapper = styled.div`
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-beetween;
   ${mobile({
-    "padding": "10px 0px",
+    padding: "10px 0px",
   })}
 `;
 const LeftBlock = styled.div`
@@ -28,7 +28,7 @@ const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
   ${mobile({
-    "display": "none",
+    display: "none",
   })}
 `;
 const SearchContainer = styled.div`
@@ -41,7 +41,7 @@ const SearchContainer = styled.div`
 const Input = styled.input`
   border: none;
   ${mobile({
-    "width": "50px",
+    width: "50px",
   })}
 `;
 const CenterBlock = styled.div`
@@ -50,6 +50,7 @@ const CenterBlock = styled.div`
 `;
 const Logo = styled.h1`
   font-weight: bold;
+  color: black;
   margin: 0;
   ${mobile({
     "font-size": "24px",
@@ -62,7 +63,7 @@ const RightBlock = styled.div`
   justify-content: flex-end;
   ${mobile({
     "justify-content": "center",
-    "flex": "2",
+    flex: "2",
   })}
 `;
 
@@ -90,32 +91,34 @@ const Badge = styled.div`
   left: 10px;
 `;
 export const Navbar = () => {
-  const quantity = useAppSelector(state=>state.cart.quantity)
+  const quantity = useAppSelector((state) => state.cart.quantity);
   return (
     <Container>
       <Wrapper>
         <LeftBlock>
           <Language>en</Language>
           <SearchContainer>
-            <Input placeholder="Search"/>
-            <AiOutlineSearch size={16} color={'gray'} />
+            <Input placeholder="Search" />
+            <AiOutlineSearch size={16} color={"gray"} />
           </SearchContainer>
         </LeftBlock>
         <CenterBlock>
-          <Logo>Shop</Logo>
+          <Link to={'/'} style={{textDecoration: "none"}}>
+            <Logo>Shop</Logo>
+          </Link>
         </CenterBlock>
         <RightBlock>
-        <Link to={'/login'}>
-          <MenuItem>Sign In</MenuItem>
-        </Link>
-        <Link to={'/register'}>
-          <MenuItem>Registration</MenuItem>
-        </Link>
-          <Link to={'/cart'}>
-          <MenuItem>
-            <AiOutlineShoppingCart />
-            {!!quantity&&<Badge>{quantity}</Badge>}
-          </MenuItem>
+          <Link to={"/login"}>
+            <MenuItem>Sign In</MenuItem>
+          </Link>
+          <Link to={"/register"}>
+            <MenuItem>Registration</MenuItem>
+          </Link>
+          <Link to={"/cart"}>
+            <MenuItem>
+              <AiOutlineShoppingCart />
+              {!!quantity && <Badge>{quantity}</Badge>}
+            </MenuItem>
           </Link>
         </RightBlock>
       </Wrapper>
